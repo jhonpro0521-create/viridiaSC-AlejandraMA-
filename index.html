@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlowTrack · Tu Rutina de Piel</title>
+  <style>
+/* ============================================================
+   GlowTrack · styles.css
+   Diseño: Realeza — Azul marino, zafiro, dorado y marfil.
+   Fuentes: Playfair Display (títulos elegantes) + DM Sans (texto limpio)
+============================================================ */
+
+/* ---------- VARIABLES DE DISEÑO ---------- */
+:root {
+  /* Paleta de colores — Inspiración Real */
+  --color-fondo:        #f0f3f9;       /* Azul marfil muy claro */
+  --color-fondo-2:      #e2e8f4;       /* Azul hielo suave */
+  --color-card:         #ffffff;
+  --color-acento:       #1a2f6e;       /* Azul marino real (navy) */
+  --color-acento-2:     #b8c8e8;       /* Azul zafiro claro */
+  --color-verde:        #4a6fa5;       /* Azul zafiro medio (reemplaza al verde) */
+  --color-verde-claro:  #d6e3f5;       /* Azul muy claro (reemplaza verde-claro) */
+  --color-texto:        #0d1b3e;       /* Azul noche profundo */
+  --color-texto-suave:  #5a6e99;       /* Azul grisáceo suave */
+  --color-borde:        #c8d5eb;       /* Borde azul claro */
+  --color-dorado:       #c9a84c;       /* Dorado real para detalles */
+
+  /* Tipografía */
+  --font-display:       'Playfair Display', Georgia, serif;
+  --font-body:          'DM Sans', system-ui, sans-serif;
+
+  /* Espaciado y radios */
+  --radio-card:         20px;
+  --radio-btn:          50px;
+  --sombra-card:        0 4px 24px rgba(26, 47, 110, 0.10);
+  --sombra-hover:       0 8px 32px rgba(26, 47, 110, 0.18);
+
+  /* Transición estándar */
+  --transicion:         0.25s ease;
+}
+
+/* ---------- RESET Y BASE ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+
+  /* Fondo sutil con textura de puntos */
+  background-image: radial-gradient(circle, var(--color-borde) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ---------- HEADER ---------- */
+.app-header {
+  background: rgba(240, 243, 249, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-borde);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 1.5rem;
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 1rem;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  font-size: 1.1rem;
+  color: var(--color-acento);
+  animation: rotar 8s linear infinite;
+}
+
+@keyframes rotar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  letter-spacing: -0.02em;
+}
+
+/* Fecha y botón de recordatorio */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fecha-actual {
+  font-size: 0.8rem;
+  color: var(--color-texto-suave);
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
+.btn-reminder {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--color-fondo-2);
+  color: var(--color-acento);
+  border: 1.5px solid var(--color-acento-2);
+  border-radius: var(--radio-btn);
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition: all var(--transicion);
+}
+
+.btn-reminder:hover {
+  background: var(--color-acento);
+  color: #fff;
+  border-color: var(--color-acento);
+}
+
+/* ---------- MAIN CONTENT ---------- */
+.app-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ---------- SECCIÓN BIENVENIDA ---------- */
+.bienvenida {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.titulo-principal {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-texto);
+  margin-bottom: 0.5rem;
+}
+
+.titulo-principal em {
+  color: var(--color-acento);
+  font-style: italic;
+}
+
+.subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+/* Tarjetas de estadísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: var(--color-card);
+  border-radius: var(--radio-card);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: var(--sombra-card);
+  border: 1px solid var(--color-borde);
+  transition: transform var(--transicion);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-hover);
+}
+
+.stat-card.highlight {
+  background: var(--color-acento);
+  border-color: var(--color-acento);
+}
+
+.stat-card.highlight .stat-numero,
+.stat-card.highlight .stat-label {
+  color: #fff;
+}
+
+.stat-numero {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-acento);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--color-texto-suave);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- SECCIÓN RUTINAS ---------- */
+.seccion-titulo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-texto);
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.seccion-titulo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--color-dorado);
+  border-radius: 2px;
+}
+
+.rutinas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Tarjeta de rutina */
+.rutina-card {
+  background: var(--color-card);
+  border-radius: var(--radio-card);
+  padding: 1.5rem;
+  box-shadow: var(--sombra-card);
+  border: 1px solid var(--color-borde);
+  transition: box-shadow var(--transicion);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rutina-card:hover {
+  box-shadow: var(--sombra-hover);
+}
+
+/* Header de la tarjeta */
+.rutina-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rutina-icono {
+  font-size: 2rem;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-fondo-2);
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.rutina-titulo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  line-height: 1.2;
+}
+
+.rutina-hora {
+  font-size: 0.75rem;
+  color: var(--color-texto-suave);
+  font-weight: 300;
+}
+
+/* Badge contador */
+.rutina-badge {
+  margin-left: auto;
+  background: var(--color-fondo-2);
+  color: var(--color-acento);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  border: 1.5px solid var(--color-acento-2);
+  white-space: nowrap;
+}
+
+/* Lista de pasos */
+.pasos-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.paso-item {
+  border-radius: 12px;
+  transition: background var(--transicion);
+}
+
+.paso-item:hover {
+  background: var(--color-fondo);
+}
+
+/* Cuando el paso está completado */
+.paso-item.completado {
+  opacity: 0.6;
+}
+
+.paso-item.completado .paso-nombre {
+  text-decoration: line-through;
+  color: var(--color-texto-suave);
+}
+
+/* Label del paso (el elemento clicable) */
+.paso-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  cursor: pointer;
+  border-radius: 12px;
+  user-select: none;
+}
+
+/* Ocultar el checkbox nativo */
+.paso-checkbox {
+  display: none;
+}
+
+/* Checkbox personalizado */
+.paso-check-custom {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--color-borde);
+  background: var(--color-card);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transicion);
+  position: relative;
+}
+
+/* Cuando el checkbox está marcado */
+.paso-checkbox:checked + .paso-check-custom {
+  background: var(--color-verde);
+  border-color: var(--color-verde);
+}
+
+.paso-checkbox:checked + .paso-check-custom::after {
+  content: '✓';
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Texto del paso */
+.paso-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.paso-nombre {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-texto);
+  transition: all var(--transicion);
+}
+
+.paso-desc {
+  font-size: 0.75rem;
+  color: var(--color-texto-suave);
+  font-weight: 300;
+}
+
+/* Barra de progreso de rutina */
+.progreso-bar-wrap {
+  height: 5px;
+  background: var(--color-fondo-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progreso-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4a6fa5, #1a2f6e);
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* Botón guardar rutina */
+.btn-guardar {
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  font-weight: 600;
+  background: var(--color-acento);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio-btn);
+  padding: 0.7rem 1.25rem;
+  cursor: pointer;
+  transition: all var(--transicion);
+  letter-spacing: 0.02em;
+  width: 100%;
+}
+
+.btn-guardar:hover {
+  background: #122060;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26, 47, 110, 0.40);
+}
+
+.btn-guardar:active {
+  transform: translateY(0);
+}
+
+.btn-guardar:disabled {
+  background: var(--color-borde);
+  color: var(--color-texto-suave);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Rutina completada visualmente */
+.rutina-card.rutina-completa {
+  border-color: var(--color-verde);
+  background: linear-gradient(135deg, #fff, var(--color-verde-claro));
+}
+
+/* ---------- SECCIÓN HISTORIAL ---------- */
+.historial-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Calendario de 30 días */
+.calendario-wrap, .historial-lista-wrap {
+  background: var(--color-card);
+  border-radius: var(--radio-card);
+  padding: 1.5rem;
+  box-shadow: var(--sombra-card);
+  border: 1px solid var(--color-borde);
+}
+
+.calendario-titulo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Grid del calendario */
+.calendario-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Cada día en el calendario */
+.cal-dia {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: default;
+  transition: transform var(--transicion);
+  border: 1.5px solid var(--color-borde);
+  background: var(--color-fondo);
+  color: var(--color-texto-suave);
+  position: relative;
+}
+
+.cal-dia:hover {
+  transform: scale(1.15);
+}
+
+.cal-dia.completo {
+  background: var(--color-verde);
+  border-color: var(--color-verde);
+  color: #fff;
+}
+
+.cal-dia.parcial {
+  background: var(--color-acento-2);
+  border-color: var(--color-acento-2);
+  color: var(--color-acento);
+}
+
+.cal-dia.hoy {
+  border-color: var(--color-acento);
+  font-weight: 700;
+}
+
+/* Leyenda del calendario */
+.calendario-leyenda {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--color-texto-suave);
+}
+
+.leyenda-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.leyenda-dot.completo { background: var(--color-verde); }
+.leyenda-dot.parcial  { background: var(--color-acento-2); }
+.leyenda-dot.vacio    { background: var(--color-fondo-2); border: 1px solid var(--color-borde); }
+
+/* Lista de historial */
+.historial-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.historial-lista::-webkit-scrollbar {
+  width: 4px;
+}
+
+.historial-lista::-webkit-scrollbar-track {
+  background: var(--color-fondo);
+  border-radius: 99px;
+}
+
+.historial-lista::-webkit-scrollbar-thumb {
+  background: var(--color-acento-2);
+  border-radius: 99px;
+}
+
+/* Item del historial */
+.historial-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  background: var(--color-fondo);
+  border-radius: 10px;
+  font-size: 0.83rem;
+  border: 1px solid transparent;
+  transition: border-color var(--transicion);
+}
+
+.historial-item:hover {
+  border-color: var(--color-borde);
+}
+
+.historial-fecha {
+  font-weight: 600;
+  color: var(--color-texto);
+  min-width: 90px;
+}
+
+.historial-estado {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.historial-tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+.historial-tag.manana {
+  background: #dde8f7;
+  color: #1a2f6e;
+}
+
+.historial-tag.noche {
+  background: #c8d5eb;
+  color: #0d1b3e;
+}
+
+/* Texto cuando no hay historial */
+.historial-vacio {
+  text-align: center;
+  color: var(--color-texto-suave);
+  font-size: 0.88rem;
+  padding: 1.5rem;
+  font-style: italic;
+}
+
+/* ---------- FOOTER ---------- */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+  border-top: 1px solid var(--color-borde);
+}
+
+/* ---------- TOAST (notificación temporal) ---------- */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--color-texto);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radio-btn);
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* Clase activa del toast */
+.toast.activo {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.exito {
+  background: var(--color-verde);
+}
+
+.toast.error {
+  background: #c0392b;
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 640px) {
+  .rutinas-grid {
+    grid-template-columns: 1fr; /* Una columna en móvil */
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .stat-numero {
+    font-size: 1.5rem;
+  }
+
+  .header-inner {
+    gap: 0.5rem;
+  }
+
+  .fecha-actual {
+    display: none; /* Ocultar fecha en pantallas pequeñas */
+  }
+
+  .cal-dia {
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+}  </style>
+  <!-- Google Fonts: Playfair Display (elegante) + DM Sans (limpio) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="logoVSC.png">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER: Título y fecha actual
+  ============================================================ -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">Viridia  </span>
+      </div>
+      <div class="header-right">
+        <p id="fecha-hoy" class="fecha-actual"></p>
+        <button id="btn-recordatorio" 
+                class="btn-reminder" 
+                title="Activar recordatorios"
+                aria-label="Activar recordatorios">
+          🔔 Recordatorio
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN: Contenido principal de la app
+  ============================================================ -->
+  <main class="app-main">
+
+    <!-- Bienvenida + resumen de progreso -->
+    <section class="bienvenida">
+      <h1 class="titulo-principal">Tu piel, <em>tu ritual</em></h1>
+      <p class="subtitulo">Cuida tu piel un paso a la vez. Cada día cuenta.</p>
+
+      <!-- Tarjetas de estadísticas -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-numero" id="stat-dias">0</span>
+          <span class="stat-label">Días completados</span>
+        </div>
+        <div class="stat-card highlight">
+          <span class="stat-numero" id="stat-porcentaje">0%</span>
+          <span class="stat-label">Consistencia (30 días)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-numero" id="stat-racha">0</span>
+          <span class="stat-label">Racha actual 🔥</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         RUTINAS: Mañana y Noche
+    ============================================================ -->
+    <section class="rutinas-section">
+      <h2 class="seccion-titulo">Rutina de hoy</h2>
+
+      <div class="rutinas-grid">
+
+        <!-- RUTINA DE MAÑANA -->
+        <div class="rutina-card" id="card-manana" data-rutina="manana">
+          <div class="rutina-header">
+            <div class="rutina-icono">☀️</div>
+            <div>
+              <h3 class="rutina-titulo">Mañana</h3>
+              <p class="rutina-hora">6:00 – 8:00 AM</p>
+            </div>
+            <div class="rutina-badge" id="badge-manana">0/4</div>
+          </div>
+
+          <!-- Pasos de la rutina de mañana -->
+          <ul class="pasos-lista" id="pasos-manana">
+            <li class="paso-item" data-rutina="manana" data-paso="limpieza">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">🧼 Limpieza facial</span>
+                  <span class="paso-desc">Limpiador suave con agua tibia</span>
+                </div>
+              </label>
+            </li>
+            <li class="paso-item" data-rutina="manana" data-paso="tonico">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">💧 Tónico hidratante</span>
+                  <span class="paso-desc">Aplica con algodón o manos</span>
+                </div>
+              </label>
+            </li>
+            <li class="paso-item" data-rutina="manana" data-paso="hidratante">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">🫧 Hidratante</span>
+                  <span class="paso-desc">Crema o gel según tu tipo de piel</span>
+                </div>
+              </label>
+            </li>
+            <li class="paso-item" data-rutina="manana" data-paso="protector">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">🌞 Protector solar</span>
+                  <span class="paso-desc">SPF 30+ como último paso</span>
+                </div>
+              </label>
+            </li>
+          </ul>
+
+          <!-- Barra de progreso de la rutina -->
+          <div class="progreso-bar-wrap">
+            <div class="progreso-bar" id="progreso-manana"></div>
+          </div>
+
+          <button class="btn-guardar" id="btn-guardar-manana">
+            Guardar rutina de mañana
+          </button>
+        </div>
+
+        <!-- RUTINA DE NOCHE -->
+        <div class="rutina-card" id="card-noche" data-rutina="noche">
+          <div class="rutina-header">
+            <div class="rutina-icono">🌙</div>
+            <div>
+              <h3 class="rutina-titulo">Noche</h3>
+              <p class="rutina-hora">8:00 – 10:00 PM</p>
+            </div>
+            <div class="rutina-badge" id="badge-noche">0/4</div>
+          </div>
+
+          <!-- Pasos de la rutina de noche -->
+          <ul class="pasos-lista" id="pasos-noche">
+            <li class="paso-item" data-rutina="noche" data-paso="desmaquillante">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">🧽 Desmaquillante</span>
+                  <span class="paso-desc">Micellar o aceite limpiador</span>
+                </div>
+              </label>
+            </li>
+            <li class="paso-item" data-rutina="noche" data-paso="limpieza">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">🧼 Limpieza profunda</span>
+                  <span class="paso-desc">Doble limpieza si usaste maquillaje</span>
+                </div>
+              </label>
+            </li>
+            <li class="paso-item" data-rutina="noche" data-paso="serum">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">✨ Sérum de noche</span>
+                  <span class="paso-desc">Retinol, vitamina C o niacinamida</span>
+                </div>
+              </label>
+            </li>
+            <li class="paso-item" data-rutina="noche" data-paso="crema">
+              <label class="paso-label">
+                <input type="checkbox" class="paso-checkbox" />
+                <span class="paso-check-custom"></span>
+                <div class="paso-info">
+                  <span class="paso-nombre">🌿 Crema de noche</span>
+                  <span class="paso-desc">Hidratación profunda mientras duermes</span>
+                </div>
+              </label>
+            </li>
+          </ul>
+
+          <div class="progreso-bar-wrap">
+            <div class="progreso-bar" id="progreso-noche"></div>
+          </div>
+
+          <button class="btn-guardar" id="btn-guardar-noche">
+            Guardar rutina de noche
+          </button>
+        </div>
+
+      </div><!-- fin rutinas-grid -->
+    </section>
+
+    <!-- ============================================================
+         HISTORIAL: Calendario simple + lista de días
+    ============================================================ -->
+    <section class="historial-section">
+      <h2 class="seccion-titulo">Tu historial</h2>
+
+      <!-- Mini calendario visual (últimos 30 días) -->
+      <div class="calendario-wrap">
+        <h3 class="calendario-titulo">Últimos 30 días</h3>
+        <div class="calendario-grid" id="calendario-grid">
+          <!-- Se genera dinámicamente desde app.js -->
+        </div>
+        <div class="calendario-leyenda">
+          <span class="leyenda-item"><span class="leyenda-dot completo"></span> Ambas rutinas</span>
+          <span class="leyenda-item"><span class="leyenda-dot parcial"></span> Una rutina</span>
+          <span class="leyenda-item"><span class="leyenda-dot vacio"></span> Sin registrar</span>
+        </div>
+      </div>
+
+      <!-- Lista de registros recientes -->
+      <div class="historial-lista-wrap">
+        <h3 class="calendario-titulo">Registros recientes</h3>
+        <ul class="historial-lista" id="historial-lista">
+          <!-- Se genera dinámicamente desde app.js -->
+          <li class="historial-vacio">Aún no hay registros. ¡Completa tu primera rutina! 🌸</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="app-footer">
+    <p>✦ Viridia · Hecho para tu bienestar</p>
+  </footer>
+
+  <!-- ============================================================
+       TOAST (notificación visual dentro de la app)
+  ============================================================ -->
+  <div id="toast" class="toast" aria-live="polite" role="status"></div>
+
+  <!-- ============================================================
+       CONFIGURACIÓN GLOBAL DE LA APP
+  ============================================================ -->
+  <script>
+    const APP_CONFIG = {
+      STORAGE_KEY: "viridia_skin_data",
+      VERSION: "1.0.0"
+    };
+  </script>
+
+  <!-- ============================================================
+       FIREBASE SDK (versión 9 modular - compat para simplicidad)
+       ⚠️ IMPORTANTE: Reemplaza la configuración con la tuya
+  ============================================================ -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <!-- Tu lógica de app -->
+  <script>
+/* ============================================================
+   GlowTrack · app.js
+   Lógica principal de la aplicación de cuidado de piel.
+
+   PARTES:
+   1. Configuración de Firebase
+   2. Variables globales y referencias al DOM
+   3. Inicialización de la app
+   4. Mostrar fecha actual
+   5. Lógica de checkboxes (marcar/desmarcar pasos)
+   6. Guardar rutina en Firestore
+   7. Cargar datos del día actual
+   8. Historial: cargar últimos 30 días
+   9. Estadísticas (días completados, porcentaje, racha)
+   10. Calendario visual
+   11. Recordatorios (notificaciones del navegador)
+   12. Toast (notificación visual dentro de la app)
+============================================================ */
+
+
+/* ============================================================
+   PARTE 1: CONFIGURACIÓN DE FIREBASE
+   ⚠️ DEBES reemplazar este objeto con el tuyo.
+   Cómo obtenerlo: Firebase Console → Tu proyecto →
+   Configuración del proyecto → SDK de Firebase → Configuración
+============================================================ */
+const firebaseConfig = {
+  apiKey:            "TU_API_KEY",
+  authDomain:        "TU_PROYECTO.firebaseapp.com",
+  projectId:         "TU_PROYECTO_ID",
+  storageBucket:     "TU_PROYECTO.appspot.com",
+  messagingSenderId: "TU_MESSAGING_SENDER_ID",
+  appId:             "TU_APP_ID"
+};
+
+// Inicializa Firebase (la librería ya fue cargada en el HTML)
+firebase.initializeApp(firebaseConfig);
+
+// Referencia a Firestore (nuestra base de datos)
+const db = firebase.firestore();
+
+// Colección donde guardamos las rutinas
+// Estructura: /rutinas/{fecha}/{campo}
+// Ejemplo:    /rutinas/2025-06-15/manana: true, pasos_manana: [...]
+const coleccionRutinas = db.collection("rutinas");
+
+
+/* ============================================================
+   PARTE 2: VARIABLES GLOBALES Y REFERENCIAS AL DOM
+   "DOM" = los elementos HTML que controlamos desde JS
+============================================================ */
+
+// Fecha de hoy en formato "YYYY-MM-DD" (usado como ID en Firestore)
+// Ejemplo: "2025-06-15"
+const HOY = obtenerFechaISO(new Date());
+
+// Contadores de pasos completados por rutina
+let pasosCompletadosManana = 0;
+let pasosCompletadosNoche  = 0;
+const TOTAL_PASOS = 4; // Cada rutina tiene 4 pasos
+
+// Referencias a elementos del HTML (los buscamos por ID)
+const elemFechaHoy        = document.getElementById("fecha-hoy");
+const badgeManana         = document.getElementById("badge-manana");
+const badgeNoche          = document.getElementById("badge-noche");
+const progresoManana      = document.getElementById("progreso-manana");
+const progresoNoche       = document.getElementById("progreso-noche");
+const btnGuardarManana    = document.getElementById("btn-guardar-manana");
+const btnGuardarNoche     = document.getElementById("btn-guardar-noche");
+const btnRecordatorio     = document.getElementById("btn-recordatorio");
+const historialLista      = document.getElementById("historial-lista");
+const calendarioGrid      = document.getElementById("calendario-grid");
+const statDias            = document.getElementById("stat-dias");
+const statPorcentaje      = document.getElementById("stat-porcentaje");
+const statRacha           = document.getElementById("stat-racha");
+const toastElem           = document.getElementById("toast");
+
+// Todos los checkboxes de la rutina de mañana
+const checkboxesManana = document.querySelectorAll("#pasos-manana .paso-checkbox");
+// Todos los checkboxes de la rutina de noche
+const checkboxesNoche  = document.querySelectorAll("#pasos-noche .paso-checkbox");
+
+
+/* ============================================================
+   PARTE 3: INICIALIZACIÓN DE LA APP
+   Esta función se ejecuta cuando la página termina de cargar.
+============================================================ */
+async function iniciarApp() {
+  mostrarFechaActual();          // Muestra la fecha en el header
+  configurarCheckboxes();        // Escucha cambios en los checkboxes
+  configurarBotonesGuardar();    // Escucha clics en "Guardar rutina"
+  configurarBotonRecordatorio(); // Escucha clic en "Recordatorio"
+  await cargarRutinaDeHoy();     // Carga si ya hay una rutina guardada hoy
+  await cargarHistorial();       // Carga los datos de los últimos 30 días
+  programarRecordatorios();      // Programa alertas si el usuario las activó
+}
+
+// Ejecuta la app cuando el HTML está listo
+document.addEventListener("DOMContentLoaded", iniciarApp);
+
+
+/* ============================================================
+   PARTE 4: MOSTRAR LA FECHA ACTUAL EN EL HEADER
+============================================================ */
+function mostrarFechaActual() {
+  // toLocaleDateString convierte la fecha al idioma del navegador
+  const opciones = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+  const fechaTexto = new Date().toLocaleDateString("es-CO", opciones);
+  elemFechaHoy.textContent = fechaTexto;
+}
+
+
+/* ============================================================
+   PARTE 5: LÓGICA DE CHECKBOXES
+   Cuando el usuario marca/desmarca un paso, actualizamos:
+   - El estilo visual del paso (tachado si está completo)
+   - El badge contador "X/4"
+   - La barra de progreso
+============================================================ */
+function configurarCheckboxes() {
+
+  // Para cada checkbox de mañana...
+  checkboxesManana.forEach(checkbox => {
+    checkbox.addEventListener("change", () => {
+      // Contamos cuántos están marcados
+      pasosCompletadosManana = contarCheckboxesMarcados(checkboxesManana);
+      actualizarUIRutina("manana", pasosCompletadosManana);
+    });
+  });
+
+  // Para cada checkbox de noche...
+  checkboxesNoche.forEach(checkbox => {
+    checkbox.addEventListener("change", () => {
+      pasosCompletadosNoche = contarCheckboxesMarcados(checkboxesNoche);
+      actualizarUIRutina("noche", pasosCompletadosNoche);
+    });
+  });
+}
+
+/**
+ * Cuenta cuántos checkboxes de una lista están marcados.
+ * @param {NodeList} checkboxes - Lista de inputs type="checkbox"
+ * @returns {number} - Cantidad de checkboxes marcados
+ */
+function contarCheckboxesMarcados(checkboxes) {
+  let count = 0;
+  checkboxes.forEach(cb => { if (cb.checked) count++; });
+  return count;
+}
+
+/**
+ * Actualiza el badge, la barra de progreso y el estilo visual
+ * de una rutina (mañana o noche).
+ * @param {string} rutina - "manana" o "noche"
+ * @param {number} completados - Cantidad de pasos completados
+ */
+function actualizarUIRutina(rutina, completados) {
+  const badge    = rutina === "manana" ? badgeManana   : badgeNoche;
+  const barra    = rutina === "manana" ? progresoManana : progresoNoche;
+  const card     = document.getElementById(`card-${rutina}`);
+  const checkboxes = rutina === "manana" ? checkboxesManana : checkboxesNoche;
+
+  // Actualizar el texto del badge: "3/4"
+  badge.textContent = `${completados}/${TOTAL_PASOS}`;
+
+  // Actualizar el ancho de la barra de progreso (en porcentaje)
+  const porcentaje = (completados / TOTAL_PASOS) * 100;
+  barra.style.width = `${porcentaje}%`;
+
+  // Marcar visualmente los pasos completados (texto tachado)
+  checkboxes.forEach(cb => {
+    const pasoItem = cb.closest(".paso-item");
+    if (cb.checked) {
+      pasoItem.classList.add("completado");
+    } else {
+      pasoItem.classList.remove("completado");
+    }
+  });
+
+  // Si todos los pasos están completos, resaltar la tarjeta
+  if (completados === TOTAL_PASOS) {
+    card.classList.add("rutina-completa");
+  } else {
+    card.classList.remove("rutina-completa");
+  }
+}
+
+
+/* ============================================================
+   PARTE 6: GUARDAR RUTINA EN FIRESTORE
+   Cuando el usuario hace clic en "Guardar rutina de mañana/noche",
+   guardamos los datos en Firestore con la fecha de hoy como ID.
+============================================================ */
+function configurarBotonesGuardar() {
+
+  btnGuardarManana.addEventListener("click", () => {
+    guardarRutina("manana", checkboxesManana, pasosCompletadosManana);
+  });
+
+  btnGuardarNoche.addEventListener("click", () => {
+    guardarRutina("noche", checkboxesNoche, pasosCompletadosNoche);
+  });
+}
+
+/**
+ * Guarda una rutina en Firestore.
+ * Usamos la fecha (HOY) como ID del documento.
+ * Si ya existe, lo actualiza (merge: true).
+ *
+ * Estructura del documento en Firestore:
+ * {
+ *   fecha: "2025-06-15",
+ *   manana: true,              // ¿Se completó la rutina de mañana?
+ *   pasos_manana: 4,           // Cuántos pasos se completaron
+ *   noche: false,
+ *   pasos_noche: 2,
+ *   timestamp: <fecha y hora>
+ * }
+ */
+async function guardarRutina(rutina, checkboxes, completados) {
+
+  // Recopilamos qué pasos específicos están marcados
+  const estadoPasos = {};
+  checkboxes.forEach(cb => {
+    // El nombre del paso viene del atributo data-paso del li
+    const paso = cb.closest("[data-paso]").getAttribute("data-paso");
+    estadoPasos[paso] = cb.checked;
+  });
+
+  // Preparamos el objeto a guardar en Firestore
+  const datos = {
+    fecha:  HOY,
+    [`${rutina}`]:          completados === TOTAL_PASOS, // true si todos los pasos
+    [`pasos_${rutina}`]:    completados,
+    [`detalle_${rutina}`]:  estadoPasos,
+    timestamp:              firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  try {
+    // setDoc con merge:true = si el documento existe, lo actualiza
+    // Si no existe, lo crea nuevo
+    await coleccionRutinas.doc(HOY).set(datos, { merge: true });
+
+    // Mostrar mensaje de éxito
+    const emoji = rutina === "manana" ? "☀️" : "🌙";
+    mostrarToast(`${emoji} Rutina de ${rutina === "manana" ? "mañana" : "noche"} guardada`, "exito");
+
+    // Recargar el historial para reflejar los cambios
+    await cargarHistorial();
+
+  } catch (error) {
+    // Si hay un error (ej: no hay internet, config incorrecta)
+    console.error("Error guardando en Firestore:", error);
+    mostrarToast("❌ Error al guardar. Revisa la configuración de Firebase.", "error");
+  }
+}
+
+
+/* ============================================================
+   PARTE 7: CARGAR LA RUTINA DEL DÍA ACTUAL
+   Al abrir la app, verificamos si ya guardamos algo hoy.
+   Si sí, restauramos el estado de los checkboxes.
+============================================================ */
+async function cargarRutinaDeHoy() {
+  try {
+    // Buscamos el documento de hoy en Firestore
+    const doc = await coleccionRutinas.doc(HOY).get();
+
+    if (!doc.exists) return; // No hay datos de hoy, salimos
+
+    const datos = doc.data();
+
+    // Restaurar el estado de los pasos de MAÑANA
+    if (datos.detalle_manana) {
+      restaurarCheckboxes(checkboxesManana, datos.detalle_manana, "manana");
+      pasosCompletadosManana = datos.pasos_manana || 0;
+      actualizarUIRutina("manana", pasosCompletadosManana);
+    }
+
+    // Restaurar el estado de los pasos de NOCHE
+    if (datos.detalle_noche) {
+      restaurarCheckboxes(checkboxesNoche, datos.detalle_noche, "noche");
+      pasosCompletadosNoche = datos.pasos_noche || 0;
+      actualizarUIRutina("noche", pasosCompletadosNoche);
+    }
+
+  } catch (error) {
+    console.error("Error cargando rutina de hoy:", error);
+  }
+}
+
+/**
+ * Marca los checkboxes según el estado guardado en Firestore.
+ * @param {NodeList} checkboxes
+ * @param {Object} detalle - Objeto con { limpieza: true, tonico: false, ... }
+ * @param {string} rutina  - "manana" o "noche"
+ */
+function restaurarCheckboxes(checkboxes, detalle, rutina) {
+  checkboxes.forEach(cb => {
+    const paso = cb.closest("[data-paso]").getAttribute("data-paso");
+    if (detalle[paso] !== undefined) {
+      cb.checked = detalle[paso]; // Restaurar true/false
+    }
+  });
+}
+
+
+/* ============================================================
+   PARTE 8: CARGAR EL HISTORIAL (ÚLTIMOS 30 DÍAS)
+   Traemos todos los documentos de los últimos 30 días,
+   generamos el calendario y la lista de registros.
+============================================================ */
+async function cargarHistorial() {
+  try {
+    // Fecha de hace 30 días en formato ISO
+    const hace30Dias = obtenerFechaISO(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
+
+    // Query: documentos donde fecha >= hace30Dias, ordenados por fecha
+    const snapshot = await coleccionRutinas
+      .where("fecha", ">=", hace30Dias)
+      .orderBy("fecha", "desc")
+      .get();
+
+    // Convertimos el resultado a un objeto { "2025-06-15": { manana, noche }, ... }
+    const registros = {};
+    snapshot.forEach(doc => {
+      const d = doc.data();
+      registros[d.fecha] = {
+        manana: d.manana || false,
+        noche:  d.noche  || false,
+        pasos_manana: d.pasos_manana || 0,
+        pasos_noche:  d.pasos_noche  || 0
+      };
+    });
+
+    // Actualizar las diferentes secciones con estos datos
+    renderizarCalendario(registros);
+    renderizarListaHistorial(registros);
+    calcularEstadisticas(registros);
+
+  } catch (error) {
+    console.error("Error cargando historial:", error);
+    // Si hay error de índice en Firestore, mostrar ayuda
+    if (error.code === "failed-precondition") {
+      mostrarToast("⚠️ Crea el índice en Firestore Console", "error");
+    }
+  }
+}
+
+
+/* ============================================================
+   PARTE 9: ESTADÍSTICAS
+   Calculamos días completados, porcentaje y racha actual.
+============================================================ */
+function calcularEstadisticas(registros) {
+  let diasCompletos   = 0;
+  let rachaActual     = 0;
+  let contandoRacha   = true;
+
+  // Obtenemos un array de los últimos 30 días en orden descendente
+  const ultimos30 = obtenerUltimos30Dias();
+
+  ultimos30.forEach(fecha => {
+    const reg = registros[fecha];
+    const completo = reg && reg.manana && reg.noche; // Ambas rutinas
+
+    if (completo) {
+      diasCompletos++;
+      if (contandoRacha) rachaActual++;
+    } else {
+      // La racha se rompe en el primer día no completo
+      // (excepto si es hoy y aún no terminó el día)
+      if (fecha !== HOY) contandoRacha = false;
+    }
+  });
+
+  const porcentaje = Math.round((diasCompletos / 30) * 100);
+
+  // Actualizar los elementos en el HTML
+  statDias.textContent        = diasCompletos;
+  statPorcentaje.textContent  = `${porcentaje}%`;
+  statRacha.textContent       = rachaActual;
+}
+
+
+/* ============================================================
+   PARTE 10: CALENDARIO VISUAL
+   Renderizamos un grid de 30 cuadritos, uno por día.
+   Color: verde=completo, melocotón=parcial, gris=vacío
+============================================================ */
+function renderizarCalendario(registros) {
+  calendarioGrid.innerHTML = ""; // Limpiar el calendario
+
+  const dias = obtenerUltimos30Dias().reverse(); // Orden ascendente para el calendario
+
+  dias.forEach(fecha => {
+    const reg = registros[fecha];
+    const div = document.createElement("div");
+    div.classList.add("cal-dia");
+
+    // Número del día del mes (ej: 15 de junio → "15")
+    const numDia = parseInt(fecha.split("-")[2], 10);
+    div.textContent = numDia;
+
+    // Tooltip al pasar el cursor
+    div.title = formatearFechaLegible(fecha);
+
+    // Colorear según el estado
+    if (reg) {
+      if (reg.manana && reg.noche) {
+        div.classList.add("completo"); // Ambas rutinas ✅
+        div.title += " · Ambas rutinas ✅";
+      } else if (reg.manana || reg.noche) {
+        div.classList.add("parcial");  // Solo una rutina 🔶
+        div.title += reg.manana ? " · Solo mañana" : " · Solo noche";
+      }
+    }
+
+    // Resaltar el día de hoy
+    if (fecha === HOY) {
+      div.classList.add("hoy");
+    }
+
+    calendarioGrid.appendChild(div);
+  });
+}
+
+/**
+ * Renderiza la lista de registros recientes (los últimos que tengamos).
+ */
+function renderizarListaHistorial(registros) {
+  historialLista.innerHTML = "";
+
+  const fechas = Object.keys(registros).sort().reverse(); // Más reciente primero
+
+  if (fechas.length === 0) {
+    historialLista.innerHTML = `
+      <li class="historial-vacio">Aún no hay registros. ¡Completa tu primera rutina! 🌸</li>
+    `;
+    return;
+  }
+
+  fechas.forEach(fecha => {
+    const reg = registros[fecha];
+    const li  = document.createElement("li");
+    li.classList.add("historial-item");
+
+    // Etiquetas de mañana/noche
+    const tagManana = reg.manana
+      ? `<span class="historial-tag manana">☀️ Mañana (${reg.pasos_manana}/${TOTAL_PASOS})</span>`
+      : `<span class="historial-tag" style="opacity:0.4">☀️ Mañana</span>`;
+
+    const tagNoche  = reg.noche
+      ? `<span class="historial-tag noche">🌙 Noche (${reg.pasos_noche}/${TOTAL_PASOS})</span>`
+      : `<span class="historial-tag" style="opacity:0.4">🌙 Noche</span>`;
+
+    li.innerHTML = `
+      <span class="historial-fecha">${formatearFechaLegible(fecha)}</span>
+      <div class="historial-estado">
+        ${tagManana}
+        ${tagNoche}
+      </div>
+    `;
+
+    historialLista.appendChild(li);
+  });
+}
+
+
+/* ============================================================
+   PARTE 11: RECORDATORIOS / NOTIFICACIONES
+   Usamos la API de Notificaciones del navegador.
+   Nota: requiere que el usuario acepte el permiso.
+============================================================ */
+
+/**
+ * Cuando el usuario hace clic en "Recordatorio",
+ * pedimos permiso para enviar notificaciones.
+ */
+function configurarBotonRecordatorio() {
+  btnRecordatorio.addEventListener("click", async () => {
+    await solicitarPermisoNotificaciones();
+  });
+}
+
+/**
+ * Solicita permiso para notificaciones del navegador.
+ * Si el usuario acepta, confirmamos con un toast.
+ */
+async function solicitarPermisoNotificaciones() {
+  // Verificamos si el navegador soporta notificaciones
+  if (!("Notification" in window)) {
+    mostrarToast("⚠️ Tu navegador no soporta notificaciones", "error");
+    return;
+  }
+
+  // Si ya tienen permiso, solo mostramos confirmación
+  if (Notification.permission === "granted") {
+    mostrarToast("✅ Recordatorios ya están activados", "exito");
+    enviarNotificacionDePrueba();
+    return;
+  }
+
+  // Si el permiso fue denegado antes
+  if (Notification.permission === "denied") {
+    mostrarToast("🚫 Notificaciones bloqueadas. Actívalas en tu navegador.", "error");
+    return;
+  }
+
+  // Pedimos el permiso (muestra el diálogo del navegador)
+  const permiso = await Notification.requestPermission();
+
+  if (permiso === "granted") {
+    mostrarToast("🔔 ¡Recordatorios activados!", "exito");
+    guardarPreferenciaRecordatorio(true);
+    enviarNotificacionDePrueba();
+  } else {
+    mostrarToast("Recordatorios no activados", "");
+  }
+}
+
+/**
+ * Envía una notificación de prueba inmediata para confirmar que funciona.
+ */
+function enviarNotificacionDePrueba() {
+  new Notification("GlowTrack 🌿", {
+    body: "¡Recordatorios activados! Te avisaremos a las 7 AM y 9 PM.",
+    icon: "https://emojicdn.elk.sh/✦" // Icono de la notificación
+  });
+}
+
+/**
+ * Programa recordatorios simulados con setTimeout.
+ * En una app real usarías Service Workers para notificaciones en segundo plano.
+ * Esta es una versión simplificada que funciona mientras la tab está abierta.
+ */
+function programarRecordatorios() {
+  if (Notification.permission !== "granted") return;
+  if (!localStorage.getItem("recordatorio_activo")) return;
+
+  const ahora  = new Date();
+  const manana = new Date(ahora);
+  manana.setHours(7, 0, 0, 0); // 7:00 AM
+
+  const noche  = new Date(ahora);
+  noche.setHours(21, 0, 0, 0);  // 9:00 PM
+
+  // Si la hora ya pasó hoy, programar para mañana
+  if (manana <= ahora) manana.setDate(manana.getDate() + 1);
+  if (noche  <= ahora) noche.setDate(noche.getDate() + 1);
+
+  const msHastaManana = manana - ahora;
+  const msHastaNoche  = noche  - ahora;
+
+  // setTimeout: ejecutar la función después de X milisegundos
+  setTimeout(() => {
+    new Notification("GlowTrack ☀️", {
+      body: "¡Buenos días! Es hora de tu rutina matutina. Tu piel te lo agradecerá 🌿"
+    });
+  }, msHastaManana);
+
+  setTimeout(() => {
+    new Notification("GlowTrack 🌙", {
+      body: "Hora de la rutina nocturna. Termina el día cuidando tu piel ✨"
+    });
+  }, msHastaNoche);
+}
+
+/**
+ * Guarda en localStorage si el usuario activó recordatorios.
+ * localStorage = almacenamiento en el navegador (persiste entre sesiones).
+ */
+function guardarPreferenciaRecordatorio(activo) {
+  if (activo) {
+    localStorage.setItem("recordatorio_activo", "true");
+  } else {
+    localStorage.removeItem("recordatorio_activo");
+  }
+}
+
+
+/* ============================================================
+   PARTE 12: TOAST (notificación visual dentro de la app)
+   Aparece en la parte inferior de la pantalla por 3 segundos.
+============================================================ */
+
+let timerToast = null; // Para cancelar el toast anterior si viene uno nuevo
+
+/**
+ * Muestra un mensaje temporal (toast) en la pantalla.
+ * @param {string} mensaje - Texto a mostrar
+ * @param {string} tipo    - "exito", "error", o "" (neutro)
+ */
+function mostrarToast(mensaje, tipo = "") {
+  // Limpiar clases anteriores
+  toastElem.className = "toast";
+
+  if (tipo) toastElem.classList.add(tipo);
+
+  toastElem.textContent = mensaje;
+  toastElem.classList.add("activo");
+
+  // Si hay un timer anterior, lo cancelamos para reiniciar
+  if (timerToast) clearTimeout(timerToast);
+
+  // Ocultar el toast después de 3 segundos
+  timerToast = setTimeout(() => {
+    toastElem.classList.remove("activo");
+  }, 3000);
+}
+
+
+/* ============================================================
+   UTILIDADES: Funciones de ayuda para fechas
+============================================================ */
+
+/**
+ * Convierte un objeto Date a formato "YYYY-MM-DD" para usar como ID en Firestore.
+ * @param {Date} fecha
+ * @returns {string} - Ej: "2025-06-15"
+ */
+function obtenerFechaISO(fecha) {
+  // toISOString() da "2025-06-15T12:00:00.000Z"
+  // .split("T")[0] toma solo la parte de la fecha
+  return fecha.toLocaleDateString("sv-SE"); // sv-SE siempre da YYYY-MM-DD
+}
+
+/**
+ * Retorna un array con las fechas ISO de los últimos 30 días, hoy incluido.
+ * Orden descendente (hoy primero).
+ * @returns {string[]}
+ */
+function obtenerUltimos30Dias() {
+  const dias = [];
+  for (let i = 0; i < 30; i++) {
+    const fecha = new Date();
+    fecha.setDate(fecha.getDate() - i);
+    dias.push(obtenerFechaISO(fecha));
+  }
+  return dias; // [hoy, ayer, anteayer, ...]
+}
+
+/**
+ * Convierte una fecha ISO a texto legible en español.
+ * @param {string} fechaISO - Ej: "2025-06-15"
+ * @returns {string} - Ej: "15 jun"
+ */
+function formatearFechaLegible(fechaISO) {
+  // Sumamos T12:00 para evitar problemas de zona horaria
+  const fecha = new Date(`${fechaISO}T12:00:00`);
+  return fecha.toLocaleDateString("es-CO", { day: "numeric", month: "short" });
+}
+  </script>
+
+</body>
+</html>
